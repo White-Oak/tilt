@@ -608,11 +608,6 @@ func (c *Cli) ExecInContainer(ctx context.Context, cID container.ID, cmd model.C
 	}
 	defer connection.Close()
 
-	err = c.ContainerExecStart(ctx, execId.ID, types.ExecStartCheck{})
-	if err != nil {
-		return errors.Wrap(err, "ExecInContainer#start")
-	}
-
 	_, err = fmt.Fprintf(out, "RUNNING: %s\n", cmd)
 	if err != nil {
 		return errors.Wrap(err, "ExecInContainer#print")
